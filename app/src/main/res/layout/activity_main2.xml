@@ -15,7 +15,7 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Text"
+            android:text="Odebrane wiadomości"
             android:textSize="24sp" />
 
         <TextView
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:text="aaaaaaa" />
+            tools:text="nick" />
 
         <ListView
             android:id="@+id/chatListView"

@@ -82,12 +82,24 @@ public class Main2Activity extends AppCompatActivity {
 
 
     public void postOnClick(View view){
-        Message msg = myHandler.obtainMessage();
+      /*  Message msg = myHandler.obtainMessage();
         Bundle b = new Bundle();
         b.putString("NICK", "JA");
         b.putString("MSG", messageEditText.getText().toString());
         msg.setData(b);
         myHandler.sendMessage(msg);
+        */
+
+      if(sampleClient!=null) {
+          MqttMessage message1 = new MqttMessage(messageEditText.getText().toString().getBytes());
+
+          try {
+              sampleClient.publish("/test", message1);
+          } catch (MqttException e) {
+              e.printStackTrace();
+          }
+      }
+
     }
 
 

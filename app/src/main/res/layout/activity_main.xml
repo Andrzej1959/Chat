@@ -31,7 +31,7 @@
             android:layout_height="79dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="iot.eclipse.org" />
+            android:text="lukan.sytes.net" />
 
         <TextView
             android:id="@+id/textView3"
