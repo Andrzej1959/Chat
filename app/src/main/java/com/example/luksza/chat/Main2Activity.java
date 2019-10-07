@@ -30,16 +30,12 @@ public class Main2Activity extends AppCompatActivity {
         chatListView = findViewById(R.id.chatListView);
         messageEditText = findViewById(R.id.messageEditText);
 
-
-
         nick = getIntent().getStringExtra(MainActivity.NICK);
         ip = getIntent().getStringExtra(MainActivity.IP);
         nickTextView.setText(getIntent().getStringExtra(MainActivity.NICK));
 
-
         adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listItems);
         chatListView.setAdapter(adapter);
-
 
         //uruchamiamy MQTT w tle
         new Thread(new Runnable() {
@@ -48,20 +44,13 @@ public class Main2Activity extends AppCompatActivity {
                 startMQTT();
             }
         }).start();
-
     }
 
-
     ListView chatListView;
-
-
     TextView nickTextView;
-
     TextView messageEditText;
     String ip;
     String nick;
-
-
 
     ArrayList<String> listItems=new ArrayList<String>();
     //DEFINING STRING ADAPTER WHICH WILL HANDLE DATA OF LISTVIEW
@@ -99,9 +88,7 @@ public class Main2Activity extends AppCompatActivity {
               e.printStackTrace();
           }
       }
-
     }
-
 
     MqttClient sampleClient=null;
 
@@ -116,18 +103,12 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
-
-
     private void startMQTT(){
         String clientId;
         MemoryPersistence persistence = new MemoryPersistence();
         try {
-            String broker = "tcp://"+ip+":1883";
+            String broker = "tcp://"+ip+":1883";    // tcp nie mqtt
+
             clientId = nick;
             sampleClient = new MqttClient(broker, clientId, persistence);
             sampleClient.setCallback(new MqttCallback() {
@@ -151,25 +132,18 @@ public class Main2Activity extends AppCompatActivity {
 
                 }
                 //TODO
-
-
-
-
             });
+
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);
             System.out.println("Connecting to broker: "+broker);
             sampleClient.connect(connOpts);
             System.out.println("Connected");
             sampleClient.subscribe("#");
+
         } catch (MqttException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-
-
     }
-
-
 }

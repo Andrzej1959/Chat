@@ -17,15 +17,10 @@ public class MainActivity extends AppCompatActivity {
         nickEditText = findViewById(R.id.nickEditText);
         ipEditText = findViewById(R.id.ipEditText);
 
-
-
-
-
     }
 
     public static String IP="ip";
     public static String NICK="nick";
-
 
     public void onClick(View v) {
 
@@ -37,8 +32,5 @@ public class MainActivity extends AppCompatActivity {
 
     EditText nickEditText;
     EditText ipEditText;
-
-
-
 
 }
