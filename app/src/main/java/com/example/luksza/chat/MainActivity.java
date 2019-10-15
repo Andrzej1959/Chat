@@ -16,21 +16,29 @@ public class MainActivity extends AppCompatActivity {
 
         nickEditText = findViewById(R.id.nickEditText);
         ipEditText = findViewById(R.id.ipEditText);
+        topicEditText = findViewById(R.id.topicEditText);
+        topicSubEditText = findViewById(R.id.topicSubEditText);
 
     }
 
     public static String IP="ip";
     public static String NICK="nick";
+    public static String TOPIC="topic";
+    public static String TOPIC_SUB="topicSub";
 
     public void onClick(View v) {
 
         Intent intent = new Intent(MainActivity.this, Main2Activity.class);
         intent.putExtra(IP, ipEditText.getText().toString());
         intent.putExtra(NICK, nickEditText.getText().toString());
+        intent.putExtra(TOPIC, topicEditText.getText().toString());
+        intent.putExtra(TOPIC_SUB, topicSubEditText.getText().toString());
         startActivity(intent);
     }
 
     EditText nickEditText;
     EditText ipEditText;
+    EditText topicEditText;
+    EditText topicSubEditText;
 
 }

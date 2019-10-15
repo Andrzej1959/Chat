@@ -32,6 +32,9 @@ public class Main2Activity extends AppCompatActivity {
 
         nick = getIntent().getStringExtra(MainActivity.NICK);
         ip = getIntent().getStringExtra(MainActivity.IP);
+        topic = getIntent().getStringExtra(MainActivity.TOPIC);
+        topicSub = getIntent().getStringExtra(MainActivity.TOPIC_SUB);
+
         nickTextView.setText(getIntent().getStringExtra(MainActivity.NICK));
 
         adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listItems);
@@ -51,6 +54,8 @@ public class Main2Activity extends AppCompatActivity {
     TextView messageEditText;
     String ip;
     String nick;
+    String topic;
+    String topicSub;
 
     ArrayList<String> listItems=new ArrayList<String>();
     //DEFINING STRING ADAPTER WHICH WILL HANDLE DATA OF LISTVIEW
@@ -83,7 +88,7 @@ public class Main2Activity extends AppCompatActivity {
           MqttMessage message1 = new MqttMessage(messageEditText.getText().toString().getBytes());
 
           try {
-              sampleClient.publish("/test", message1);
+              sampleClient.publish(topic, message1);
           } catch (MqttException e) {
               e.printStackTrace();
           }
@@ -108,8 +113,8 @@ public class Main2Activity extends AppCompatActivity {
         MemoryPersistence persistence = new MemoryPersistence();
         try {
             String broker = "tcp://"+ip+":1883";    // tcp nie mqtt
-
             clientId = nick;
+
             sampleClient = new MqttClient(broker, clientId, persistence);
             sampleClient.setCallback(new MqttCallback() {
                 @Override
@@ -121,6 +126,7 @@ public class Main2Activity extends AppCompatActivity {
                 public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
                     Message msg = myHandler.obtainMessage();
                     Bundle b = new Bundle();
+
                     b.putString("NICK", nick);
                     b.putString("MSG", mqttMessage.toString());
                     msg.setData(b);
@@ -139,7 +145,7 @@ public class Main2Activity extends AppCompatActivity {
             System.out.println("Connecting to broker: "+broker);
             sampleClient.connect(connOpts);
             System.out.println("Connected");
-            sampleClient.subscribe("#");
+            sampleClient.subscribe(topicSub);
 
         } catch (MqttException e) {
             // TODO Auto-generated catch block
